@@ -3,7 +3,7 @@ let form = window.document.getElementById('addForm');
 let table = window.document.getElementById('employees');
 
 // SET A COUNT VARIABLE TO DISPLAY NEXT TO EMPLOYEES HEADER
-let totalNumber
+let numCounter
 
 // ADD EMPLOYEE
 form.addEventListener('submit', (e) => {
@@ -23,33 +23,34 @@ form.addEventListener('submit', (e) => {
     console.log(deptVal);
 
     // INSERT A NEW ROW AT THE END OF THE EMPLOYEES TABLE
-    let newTr = document.createElement('tr');
-    console.log(newTr);
-    // let trContent = document.createTextNode('ID Name Ext Email Department');
-    // console.log(trContent);
-    // table.appendChild(trContent); 
-    // console.log(table);
-    
-    let list = document.querySelector('#employees');
-    console.log(list);
-    list.appendChild(newTr); 
+    let newRow = table.insertRow();
+    console.log(newRow);   
 
     // INSERT A CELL FOR EACH ITEM WITHIN THE NEW ROW
-    let cells = document.querySelectorAll('th');
-
+    let cell1 = newRow.insertCell(0);
+    let cell2 = newRow.insertCell(1);
+    let cell3 = newRow.insertCell(2);
+    let cell4 = newRow.insertCell(3);
+    let cell5 = newRow.insertCell(4);
+    let cell6 = newRow.insertCell(5);
 
     // APPEND THE TEXT VALUES AS TEXT NODES WITHIN THE CELLS
-    trContent = document.creatTextNode('');
-    newTr.appendChild(trContent);
-    // trContent2
-    // trContent[2]
-    // trContent[3]
-    // trContent[4]
-
+    cell1.innerHTML = idVal;
+    cell2.innerHTML = nameVal;
+    cell3.innerHTML = extVal;
+    cell4.innerHTML = emailVal;
+    cell5.innerHTML = deptVal;
+   
     // CREATE THE DELETE BUTTON
     let deleteBtn = document.createElement('button');
-    let th = document.querySelectorAll('th');
-    th.appendChild(deleteBtn);
+    deleteBtn.type = 'button';
+    deleteBtn.value = 'Delete';    
+    deleteBtn.innerHTML = 'X';
+    deleteBtn.style.color = 'red';
+    deleteBtn.style.backgroundColor = 'black';
+    // deleteBtn.onclick = deleteRow(this);
+   // Put this delete button in cell6
+    cell6.appendChild(deleteBtn);
 
     // RESET THE FORM
     form.reset();
@@ -63,4 +64,11 @@ form.addEventListener('submit', (e) => {
 });
 
 // DELETE EMPLOYEE
-table.removechildren[i];
+//deleteBtn.addEventListener('click', deleteMe,false);
+function deleteMe() {
+    if (window.confirm('Are you sure to delete this employee?')){
+        table.deleteRow(this);
+    } else {
+        window.document.getElementById('id').focus();
+    };    
+};
