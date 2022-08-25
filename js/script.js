@@ -3,7 +3,10 @@ let form = window.document.getElementById('addForm');
 let table = window.document.getElementById('employees');
 
 // SET A COUNT VARIABLE TO DISPLAY NEXT TO EMPLOYEES HEADER
-let numCounter
+let total=0;
+let numCounter = window.document.getElementById('empCount');
+console.log(numCounter);
+
 
 // ADD EMPLOYEE
 form.addEventListener('submit', (e) => {
@@ -24,7 +27,7 @@ form.addEventListener('submit', (e) => {
 
     // INSERT A NEW ROW AT THE END OF THE EMPLOYEES TABLE
     let newRow = table.insertRow();
-    console.log(newRow);   
+    console.log(newRow);
 
     // INSERT A CELL FOR EACH ITEM WITHIN THE NEW ROW
     let cell1 = newRow.insertCell(0);
@@ -40,35 +43,41 @@ form.addEventListener('submit', (e) => {
     cell3.innerHTML = extVal;
     cell4.innerHTML = emailVal;
     cell5.innerHTML = deptVal;
-   
+
     // CREATE THE DELETE BUTTON
     let deleteBtn = document.createElement('button');
-    deleteBtn.type = 'button';
-    deleteBtn.value = 'Delete';    
+    deleteBtn.id = 'deleteBtnId';
+    deleteBtn.type = 'submit';
+    deleteBtn.name = 'delete'
+    deleteBtn.value = 'submit';
     deleteBtn.innerHTML = 'X';
     deleteBtn.style.color = 'red';
     deleteBtn.style.backgroundColor = 'black';
-    // deleteBtn.onclick = deleteRow(this);
-   // Put this delete button in cell6
+    deleteBtn.addEventListener('click', deleteMe, false);
+    document.body.appendChild(deleteBtn);
+
+    console.log(deleteBtn);
+
+    // Put this delete button in cell6
     cell6.appendChild(deleteBtn);
 
     // RESET THE FORM
     form.reset();
+    total += 1;
 
     // SET FOCUS BACK TO THE ID TEXT BOX
     window.document.getElementById('id').focus();
 
-    // INCREMENENT THE NUMBER OF EMPLOYEES IN THE TABLE
-    
-
+    // INCREMENENT THE NUMBER OF EMPLOYEES IN THE TABLE    
+    numCounter.innerHTML = 'Total: ' + total;
 });
 
-// DELETE EMPLOYEE
-//deleteBtn.addEventListener('click', deleteMe,false);
+// DELETE EMPLOYEE  
 function deleteMe() {
-    if (window.confirm('Are you sure to delete this employee?')){
-        table.deleteRow(this);
+    console.log(event.target.id);
+    if (window.confirm('Are you sure to delete this employee?')) {
+        table.deleteRow(this);                                      // --Why can I delete fileds' name of this table?
     } else {
         window.document.getElementById('id').focus();
-    };    
+    };
 };
