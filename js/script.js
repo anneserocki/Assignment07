@@ -67,7 +67,6 @@ form.addEventListener('submit', (e) => {
 });
 
 // DELETE EMPLOYEE
-// deleteBtn.addEventListener('click', deleteMe(), false);
 function deleteMe() {
     if (window.confirm('Are you sure to delete this employee?')) {
         var td = event.target.parentNode;
