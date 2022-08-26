@@ -3,10 +3,10 @@ let form = window.document.getElementById('addForm');
 let table = window.document.getElementById('employees');
 
 // SET A COUNT VARIABLE TO DISPLAY NEXT TO EMPLOYEES HEADER
-let total=0;
+let total = 0;
 let numCounter = window.document.getElementById('empCount');
 console.log(numCounter);
-
+numCounter.innerHTML = 'Total: '
 
 // ADD EMPLOYEE
 form.addEventListener('submit', (e) => {
@@ -45,18 +45,12 @@ form.addEventListener('submit', (e) => {
     cell5.innerHTML = deptVal;
 
     // CREATE THE DELETE BUTTON
-    let deleteBtn = document.createElement('button');
-    deleteBtn.id = 'deleteBtnId';
-    deleteBtn.type = 'submit';
-    deleteBtn.name = 'delete'
-    deleteBtn.value = 'submit';
-    deleteBtn.innerHTML = 'X';
-    deleteBtn.style.color = 'red';
-    deleteBtn.style.backgroundColor = 'black';
-    deleteBtn.addEventListener('click', deleteMe, false);
+    let deleteBtn = document.createElement("button");
     document.body.appendChild(deleteBtn);
-
-    console.log(deleteBtn);
+    deleteBtn.textContent = 'X';
+    deleteBtn.style.backgroundColor = "black";
+    deleteBtn.style.color = "red";
+    deleteBtn.addEventListener("click", deleteMe, false);
 
     // Put this delete button in cell6
     cell6.appendChild(deleteBtn);
@@ -72,12 +66,18 @@ form.addEventListener('submit', (e) => {
     numCounter.innerHTML = 'Total: ' + total;
 });
 
-// DELETE EMPLOYEE  
+// DELETE EMPLOYEE
+// deleteBtn.addEventListener('click', deleteMe(), false);
 function deleteMe() {
-    console.log(event.target.id);
     if (window.confirm('Are you sure to delete this employee?')) {
-        table.deleteRow(this);                                      // --Why can I delete fileds' name of this table?
+        var td = event.target.parentNode;
+        var tr = td.parentNode; // the row to be removed
+        tr.parentNode.removeChild(tr);
+        total -= 1;
+        numCounter.innerHTML = 'Total: ' + total;
+    } else if (total == 0) {
+        alert('No records!');
     } else {
-        window.document.getElementById('id').focus();
-    };
+        return false;
+    }
 };
