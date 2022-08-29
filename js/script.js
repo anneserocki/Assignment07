@@ -70,12 +70,10 @@ form.addEventListener('submit', (e) => {
 function deleteMe() {
     if (window.confirm('Are you sure to delete this employee?')) {
         var td = event.target.parentNode;
-        var tr = td.parentNode; // the row to be removed
+        var tr = td.parentNode;        // the row to be removed
         tr.parentNode.removeChild(tr);
         total -= 1;
-        numCounter.innerHTML = 'Total: ' + total;
-    } else if (total == 0) {
-        alert('No records!');
+        numCounter.innerHTML = 'Total: ' + total;    
     } else {
         return false;
     }
